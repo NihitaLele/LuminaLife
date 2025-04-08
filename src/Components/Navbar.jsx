@@ -12,6 +12,7 @@ const Navbar = () => {
         <Route path="/" element={<HeroSection />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/HeroSection" element={<HeroSection/>}/>
       </Routes>
     </BrowserRouter>
   );
@@ -26,7 +27,7 @@ const navigate = useNavigate()
             alt="LuminaLife Logo"
             className="w-11 h-11 rounded-full object-cover"
           />
-          <h1 className="text-3xl font-bold text-[#54402d] ">LuminaLife</h1>
+          <button className="text-3xl font-bold text-[#54402d] " onClick={()=>navigate("/HeroSection")}>LuminaLife</button>
         </div>
 
         <div className="flex items-center gap-4">
