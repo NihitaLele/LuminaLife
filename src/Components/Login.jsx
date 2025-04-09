@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate()
+
   const [uEmail, setEmail] = useState("");
   const [uPassword, setPassword] = useState("");
 
@@ -54,7 +58,7 @@ const Login = () => {
 
         <div className="text-center">
           <p className="text-[#54402d]">Haven't signed up yet?</p>
-          <button className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all">
+          <button onClick={()=>navigate("/SignUp")} className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all">
             Sign Up
           </button>
         </div>

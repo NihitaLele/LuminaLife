@@ -1,6 +1,6 @@
 import express from "express"
 import { db } from "./Database/mySql.js";
-import { User } from "./Model/user.js";
+import { User } from "./Model/userModel.js";
 
 
 const app = express();

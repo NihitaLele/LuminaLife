@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate()
   return (
     <section className="bg-white py-16 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-6">
@@ -22,6 +24,7 @@ const HeroSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
             <motion.button
+              onClick={()=>navigate("/SignUp")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#d8e2dc] font-bold text-[#54402d] px-4 py-2 rounded-md hover:bg-[#bcd4cb] transition-all"

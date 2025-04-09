@@ -1,9 +1,32 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { signUp } from '../../LuminaLife_Backend/Controller/userController';
 
 const SignUp = () => {
+
+  const navigate = useNavigate()
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const userData = {
+    userName : name,
+    userEmail : email,
+    userPassword : password
+  }
+ 
+const userRegister = () =>{
+  console.log("register")
+  axios.post("http://localhost:3000/registerUser", userData)
+  .then((response)=>{
+    console.log(response)
+    alert("user registered")
+  }).catch((error)=>{
+    console.log(error)
+  })
+}
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 font-sans">
@@ -52,7 +75,7 @@ const SignUp = () => {
             />
           </div>
 
-          <button className="w-full bg-[#d8e2dc] text-[#54402d] font-semibold py-2 rounded-md hover:bg-[#bcd4cb] transition-all">
+          <button onClick={userRegister} className="w-full bg-[#d8e2dc] text-[#54402d] font-semibold py-2 rounded-md hover:bg-[#bcd4cb] transition-all">
             Sign Up
           </button>
         </div>
@@ -63,7 +86,7 @@ const SignUp = () => {
 
         <div className="text-center">
           <p className="text-[#54402d]">Already have an account?</p>
-          <button className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all">
+          <button onClick={()=>navigate("/Login")} className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all">
             Login
           </button>
         </div>
