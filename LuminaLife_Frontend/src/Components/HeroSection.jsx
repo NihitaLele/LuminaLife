@@ -18,9 +18,7 @@ const HeroSection = () => {
             <span className="text-[#7c6f64]">Illuminate</span> Your Wellness Journey
           </h1>
           <p className="text-gray-600 text-lg mb-8">
-            Track your mood, habits, fitness, and reflections — all in one
-            beautiful, intuitive dashboard designed to bring clarity to your
-            well-being.
+          Track your mood, habits, fitness, and reflections — all in one beautiful, intuitive dashboard designed to bring clarity to your well-being.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
             <motion.button

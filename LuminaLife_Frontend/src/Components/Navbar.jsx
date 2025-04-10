@@ -1,6 +1,8 @@
 import React from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Footer from "./Footer";
+// import AboutUs from "./AboutUs";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import HeroSection from "./HeroSection";
 
@@ -13,7 +15,9 @@ const Navbar = () => {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/HeroSection" element={<HeroSection/>}/>
+        {/* <Route path="/AboutUs" element={<AboutUs/>} /> */}
       </Routes>
+    <Footer />
     </BrowserRouter>
   );
 };
