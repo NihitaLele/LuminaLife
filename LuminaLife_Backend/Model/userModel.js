@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { db } from "../Database/mySql.js";
 
-export const User = db.define("User",
+ const User = db.define("User",
 
     {
         id : {
@@ -25,3 +25,4 @@ export const User = db.define("User",
     }
 )
 
+export default User
