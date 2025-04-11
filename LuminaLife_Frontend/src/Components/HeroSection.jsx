@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate()
+  
   return (
     <section className="bg-white py-16 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-6">

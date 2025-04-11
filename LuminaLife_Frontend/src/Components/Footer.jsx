@@ -73,7 +73,7 @@ const Footer = () => {
               <li>
                 <button
                   className="text-[#6c757d] hover:text-[#54402d] transition-colors"
-                  // onClick={() => navigate("/AboutUs")}
+                  onClick={() => navigate("/AboutUs")}
                 >
                   About Us
                 </button>
