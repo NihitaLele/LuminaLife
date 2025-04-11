@@ -1,5 +1,4 @@
 import React from "react";
-// import AboutUs from "./AboutUs";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -21,7 +20,8 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-[#6c757d] mb-4">
-            Mindful wellness made simple — <br/>for your mind, body, and lifestyle.
+              Mindful wellness made simple — <br />
+              for your mind, body, and lifestyle.
             </p>
             <div className="flex gap-4">
               <button className="text-[#54402d] hover:text-[#faedcd]">
@@ -79,7 +79,10 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
+                <button
+                  onClick={() => navigate("/Services")}
+                  className="text-[#6c757d] hover:text-[#54402d] transition-colors"
+                >
                   Services
                 </button>
               </li>
@@ -103,32 +106,32 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Mind & Mood Support
+                  Mind & Mood Support
                 </button>
               </li>
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Fitness & Body Tracking
+                  Fitness & Body Tracking
                 </button>
               </li>
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Lifestyle & Habit Coaching
+                  Lifestyle & Habit Coaching
                 </button>
               </li>
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Journaling & Reflection
+                  Journaling & Reflection
                 </button>
               </li>
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Sleep, Water & Wellness Logs
+                  Sleep, Water & Wellness Logs
                 </button>
               </li>
               <li>
                 <button className="text-[#6c757d] hover:text-[#54402d] transition-colors">
-                Gamified Growth & Motivation
+                  Gamified Growth & Motivation
                 </button>
               </li>
             </ul>
@@ -176,4 +179,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

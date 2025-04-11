@@ -3,6 +3,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Footer from "./Footer";
 import AboutUs from "./AboutUs";
+import Services from "./Services";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import HeroSection from "./HeroSection";
 
@@ -16,6 +17,7 @@ const Navbar = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/HeroSection" element={<HeroSection/>}/>
         <Route path="/AboutUs" element={<AboutUs/>} />
+        <Route path="/Services" element={<Services/>} />
       </Routes>
     <Footer />
     </BrowserRouter>
