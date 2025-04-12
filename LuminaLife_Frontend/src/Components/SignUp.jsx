@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 import axios from 'axios';
 
 const SignUp = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const userData = {
-    userName : name,
-    userEmail : email,
-    userPassword : password
-  }
- 
-const userRegister = () =>{
-  console.log("register")
-  axios.post("http://localhost:3000/registerUser", userData)
-  .then((response)=>{
-    console.log(response)
-    alert("user registered")
-  }).catch((error)=>{
-    console.log(error)
-  })
-}
+    userName: name,
+    userEmail: email,
+    userPassword: password,
+  };
+
+  const userRegister = () => {
+    axios.post("http://localhost:3000/registerUser", userData)
+      .then((response) => {
+        console.log(response);
+        alert("User registered");
+        navigate("/Login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 font-sans">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-xl/20 p-8 space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-4 py-10 font-sans">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6"
+      >
         <img
-          src="src/assets/SignUp.png"
+          src="/src/assets/SignUp.png" // Make sure this path is correct
           alt="Signup Illustration"
           className="w-24 h-24 mx-auto rounded-full object-cover shadow-sm"
         />
@@ -74,7 +80,10 @@ const userRegister = () =>{
             />
           </div>
 
-          <button onClick={userRegister} className="w-full bg-[#d8e2dc] text-[#54402d] font-semibold py-2 rounded-md hover:bg-[#bcd4cb] transition-all">
+          <button
+            onClick={userRegister}
+            className="w-full bg-[#d8e2dc] text-[#54402d] font-semibold py-2 rounded-md hover:bg-[#bcd4cb] transition-all"
+          >
             Sign Up
           </button>
         </div>
@@ -85,15 +94,16 @@ const userRegister = () =>{
 
         <div className="text-center">
           <p className="text-[#54402d]">Already have an account?</p>
-          <button onClick={()=>navigate("/Login")} className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all">
+          <button
+            onClick={() => navigate("/Login")}
+            className="mt-2 text-[#54402d] bg-[#f6cfcf] px-4 py-1 rounded-md hover:bg-[#eac3c3] transition-all"
+          >
             Login
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 export default SignUp;
-
-

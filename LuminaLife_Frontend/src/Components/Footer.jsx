@@ -64,7 +64,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => navigate("/HeroSection")}
+                  onClick={() => navigate("/")}
                   className="text-[#6c757d] hover:text-[#54402d] transition-colors"
                 >
                   Home
