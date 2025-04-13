@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React from "react";
 import HeroSection from "../Components/HeroSection";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className="flex items-center justify-between px-6 py-4  shadow-md font-sans">
+    <nav className="flex items-center justify-between px-6 py-4 shadow-md font-sans">
       <div className="flex items-center gap-3">
         <img
           src="https://i.pinimg.com/736x/1f/fb/b4/1ffbb480db76df93b4cda630ca674c36.jpg"

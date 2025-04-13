@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from 'axios';
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const userData = {
     userName: name,
@@ -17,7 +17,8 @@ const SignUp = () => {
   };
 
   const userRegister = () => {
-    axios.post("http://localhost:3000/registerUser", userData)
+    axios
+      .post("http://localhost:3000/registerUser", userData)
       .then((response) => {
         console.log(response);
         alert("User registered");
@@ -41,11 +42,15 @@ const SignUp = () => {
           alt="Signup Illustration"
           className="w-24 h-24 mx-auto rounded-full object-cover shadow-sm"
         />
-        <h3 className="text-2xl font-bold text-center text-[#54402d]">Welcome to LuminaLife!</h3>
+        <h3 className="text-2xl font-bold text-center text-[#54402d]">
+          Welcome to LuminaLife!
+        </h3>
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="signName" className="block text-[#54402d] mb-1">Name</label>
+            <label htmlFor="signName" className="block text-[#54402d] mb-1">
+              Name
+            </label>
             <input
               type="text"
               id="signName"
@@ -57,7 +62,9 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label htmlFor="signEmail" className="block text-[#54402d] mb-1">Email</label>
+            <label htmlFor="signEmail" className="block text-[#54402d] mb-1">
+              Email
+            </label>
             <input
               type="email"
               id="signEmail"
@@ -69,7 +76,9 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label htmlFor="signPassword" className="block text-[#54402d] mb-1">Password</label>
+            <label htmlFor="signPassword" className="block text-[#54402d] mb-1">
+              Password
+            </label>
             <input
               type="password"
               id="signPassword"
@@ -89,7 +98,8 @@ const SignUp = () => {
         </div>
 
         <p className="text-sm text-center text-[#7c6f64]">
-          By using this app, you agree to LuminaLife's <u>Privacy Policy</u> & <u>Terms of Use</u>.
+          By using this app, you agree to LuminaLife's <u>Privacy Policy</u> &{" "}
+          <u>Terms of Use</u>.
         </p>
 
         <div className="text-center">
