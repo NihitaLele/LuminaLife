@@ -64,29 +64,7 @@ const Services = () => {
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <strong className="text-[#54402d]">Daily Journal</strong>
-                      <p className="text-gray-600">
-                        Record thoughts with customizable tags and receive
-                        gentle AI insights
-                      </p>
-                    </div>
-                  </li>
+
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
                       <svg
@@ -173,29 +151,6 @@ const Services = () => {
                       </svg>
                     </div>
                     <div>
-                      <strong className="text-[#54402d]">Fitness Log</strong>
-                      <p className="text-gray-600">
-                        Track workouts, repetitions, and sets to monitor your
-                        progress
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
                       <strong className="text-[#54402d]">
                         Water Intake Tracker
                       </strong>
@@ -228,31 +183,6 @@ const Services = () => {
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <strong className="text-[#54402d]">
-                        Weekly Health Summary
-                      </strong>
-                      <p className="text-gray-600">
-                        Visualize your progress with intuitive charts and
-                        insights
-                      </p>
-                    </div>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -273,29 +203,6 @@ const Services = () => {
                 </p>
 
                 <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <strong className="text-[#54402d]">Habit Tracker</strong>
-                      <p className="text-gray-600">
-                        Create and monitor habits with visual progress
-                        indicators
-                      </p>
-                    </div>
-                  </li>
                   <li className="flex items-start">
                     <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
                       <svg
@@ -339,56 +246,6 @@ const Services = () => {
                       <p className="text-gray-600">
                         Organize your wellness routines with simple task
                         management
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <strong className="text-[#54402d]">
-                        Weekly Reflection
-                      </strong>
-                      <p className="text-gray-600">
-                        Guided prompts with optional AI summaries of your
-                        progress
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-[#54402d]"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <strong className="text-[#54402d]">
-                        Streaks & XP Points
-                      </strong>
-                      <p className="text-gray-600">
-                        Stay motivated with gamified rewards for consistent
-                        practice
                       </p>
                     </div>
                   </li>

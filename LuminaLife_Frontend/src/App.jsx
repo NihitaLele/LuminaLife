@@ -6,23 +6,26 @@ import Footer from "./Components/Footer";
 import HeroSection from "./Components/HeroSection";
 import Loader from "./Components/Loader";
 
-
 const Login = React.lazy(() => import("./Components/Login"));
 const SignUp = React.lazy(() => import("./Components/SignUp"));
 const AboutUs = React.lazy(() => import("./Components/AboutUs"));
 const Services = React.lazy(() => import("./Components/Services"));
+const Dashboard = React.lazy(() => import("./Components/DashBoard"));
+const Meditation = React.lazy(() => import("./Components/Meditation"));
 
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
-       <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HeroSection />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Services" element={<Services />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Dashboard/Meditation" element={<Meditation />} />
         </Routes>
       </Suspense>
       <Footer />
