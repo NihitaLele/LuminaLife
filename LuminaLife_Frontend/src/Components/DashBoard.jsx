@@ -1,13 +1,7 @@
 // Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FaHome,
-  FaChartBar,
-  FaSignOutAlt,
-  FaUser,
-  FaSpa,
-} from "react-icons/fa";
+
 import {
   BarChart,
   Bar,
@@ -99,42 +93,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
-        <div>
-          <div className="mb-8 text-center">
-            <div className="w-20 h-20 bg-[#bcd4cb] rounded-full mx-auto mb-2"></div>
-            <h2 className="text-lg font-semibold text-[#54402d]">Nihita 💖</h2>
-          </div>
-          <nav className="space-y-4 text-gray-700">
-            <button
-              onClick={() => setActiveSection("")}
-              className={`flex items-center gap-3 w-full text-left px-2 py-2 rounded-lg ${
-                activeSection === ""
-                  ? "bg-[#bcd4cb] text-[#54402d]"
-                  : "hover:bg-[#a5c3b8] text-[#54402d]"
-              }`}
-            >
-              <FaHome /> Dashboard
-            </button>
-            <button className="flex items-center gap-3 w-full text-left px-2 py-2 rounded-lg hover:bg-[#a5c3b8] text-[#54402d]">
-              <FaUser /> Profile
-            </button>
-            <button className="flex items-center gap-3 w-full text-left px-2 py-2 rounded-lg hover:bg-[#a5c3b8] text-[#54402d]">
-              <FaChartBar /> Insights
-            </button>
-            <button
-              onClick={() => navigate("/Dashboard/Meditation")}
-              className="flex items-center gap-3 w-full text-left px-2 py-2 rounded-lg hover:bg-[#a5c3b8] text-[#54402d]"
-            >
-              <FaSpa /> Meditate
-            </button>
-          </nav>
-        </div>
-        <button className="flex items-center gap-2 text-red-500 hover:text-red-600">
-          <FaSignOutAlt /> Logout
-        </button>
-      </aside>
+
 
       {/* Main Content */}
       <main className="flex-1 p-6 grid gap-6">

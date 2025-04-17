@@ -20,7 +20,7 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         alert("User Logged in");
-        navigate("/Dashboard");
+        navigate("/DashBoardLayout/DashBoard");
       })
       .catch((error) => {
         console.log(error);

@@ -121,7 +121,7 @@ const HeroSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <strong className="text-[#54402d]">Daily Journal</strong>
+                    <strong className="text-[#54402d]">Meditation Timer</strong>
                   </div>
                 </li>
               </ul>
@@ -160,7 +160,7 @@ const HeroSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <strong className="text-[#54402d]">Fitness Log</strong>
+                    <strong className="text-[#54402d]">Water Intake Tracker</strong>
                   </div>
                 </li>
                 <li className="flex items-start">
@@ -218,7 +218,7 @@ const HeroSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <strong className="text-[#54402d]">Habit Tracker</strong>
+                    <strong className="text-[#54402d]">Daily To-Dos</strong>
                   </div>
                 </li>
                 <li className="flex items-start">

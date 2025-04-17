@@ -1,6 +1,6 @@
 import express from "express"
 import { db } from "./Database/mySql.js";
-import  User  from "./Model/userModel.js";
+// import  User  from "./Model/userModel.js";
 import cors from "cors"
 import userRoute from "./Routes/userRoutes.js"
 import bodyParser from "body-parser";
@@ -12,8 +12,8 @@ app.use(cors())
 
 app.use(bodyParser.json())
 
-db.sync()
-// db.sync({ force: true })
+// db.sync()
+db.sync({ force: true })
 
 app.use(userRoute)
 
