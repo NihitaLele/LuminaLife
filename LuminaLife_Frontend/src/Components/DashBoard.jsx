@@ -1,29 +1,13 @@
-// Dashboard.jsx
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import {
-  BarChart,
-  Bar,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState("");
-  const [todos, setTodos] = useState([]);
   const [todoInput, setTodoInput] = useState("");
+  const [todos, setTodos] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [waterIntake, setWaterIntake] = useState(0);
   const [sleepHours, setSleepHours] = useState(7);
   const [sleepGoal, setSleepGoal] = useState(8);
+  const [thought, setThought] = useState("Loading...");
 
   const addTodo = () => {
     if (todoInput.trim() !== "") {
@@ -49,7 +33,25 @@ const Dashboard = () => {
     setEditingIndex(index);
   };
 
-  const [thought, setThought] = useState("Loading...");
+  useEffect(() => {
+    async function fetchThought() {
+      try {
+        const response = await fetch("https://api.api-ninjas.com/v1/advice", {
+          headers: {
+            "X-Api-Key": "YOUR_API_KEY", // Replace with your own API key
+          },
+        });
+        const data = await response.json();
+        if (data && data.advice) {
+          setThought(data.advice);
+        }
+      } catch (error) {
+        console.error("Error fetching thought:", error);
+        setThought("Stay positive and productive! 💪");
+      }
+    }
+    fetchThought();
+  }, []);
 
   const waterData = [
     { day: "Mon", ml: 1500 },
@@ -71,38 +73,13 @@ const Dashboard = () => {
     { day: "Sun", hours: 7.5 },
   ];
 
-  useEffect(() => {
-    async function fetchThought() {
-      try {
-        const response = await fetch("https://api.api-ninjas.com/v1/advice", {
-          headers: {
-            "X-Api-Key": "YOUR_API_KEY", // Replace with your own API key
-          },
-        });
-        const data = await response.json();
-        if (data && data.advice) {
-          setThought(data.advice);
-        }
-      } catch (error) {
-        console.error("Error fetching thought:", error);
-        setThought("Stay positive and productive! 💪");
-      }
-    }
-    fetchThought();
-  }, []);
-
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
-
-
-      {/* Main Content */}
       <main className="flex-1 p-6 grid gap-6">
         {/* Welcome Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6">
           <h2 className="text-2xl font-bold text-[#54402d]">Hey Nihita 🌸</h2>
-          <p className="text-[#7c6f64] mt-1">
-            Hope you’re feeling awesome today! Let’s make it productive 💪✨
-          </p>
+          <p className="text-[#7c6f64] mt-1">Hope you’re feeling awesome today!</p>
         </div>
 
         {/* Thought of the Day */}
@@ -110,21 +87,53 @@ const Dashboard = () => {
           <p className="italic font-medium">{thought} 💫</p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {["To-Do Tasks", "Mood Logs"].map((item) => (
-            <div key={item} className="bg-white rounded-2xl shadow-md p-4">
-              <h3 className="text-[#7c6f64]">{item}</h3>
-              <p className="text-2xl font-semibold text-[#54402d]">12</p>
-            </div>
-          ))}
+        {/* To-Do Section */}
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          <h3 className="text-xl font-semibold text-[#54402d] mb-4">Your To-Do List</h3>
+          <div className="flex gap-2 mb-4">
+            <input
+              type="text"
+              placeholder="Add a new task..."
+              className="flex-1 px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
+              value={todoInput}
+              onChange={(e) => setTodoInput(e.target.value)}
+            />
+            <button
+              className="bg-[#bcd4cb] hover:bg-[#a5c3b8] text-[#54402d] px-4 py-2 rounded-lg font-medium"
+              onClick={addTodo}
+            >
+              {editingIndex !== null ? "Update" : "Add"}
+            </button>
+          </div>
+          <ul className="space-y-2">
+            {todos.length === 0 && <li className="text-[#7c6f64] italic">No tasks yet 🌱</li>}
+            {todos.map((todo, index) => (
+              <li key={index} className="flex items-center justify-between">
+                <span className="text-[#54402d]">{todo}</span>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => startEditing(index)}
+                    className="text-[#bcd4cb] hover:text-[#a5c3b8]"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => deleteTodo(index)}
+                    className="text-red-500 hover:text-red-600"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Daily Check-in */}
           <div className="bg-white from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm">
             <h3 className="text-lg font-medium text-gray-800 mb-3">
-              Daily Check-in
+              Daily Check-in❤️
             </h3>
             <p className="text-gray-600 mb-4">How are you feeling today?</p>
             <div className="flex space-x-4 mb-4 flex-wrap">
@@ -157,61 +166,12 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Todo Section */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-            Your To-Do List
-          </h3>
-          <div className="flex gap-2 mb-4">
-            <input
-              type="text"
-              placeholder="Add a new task..."
-              className="flex-1 px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
-              value={todoInput}
-              onChange={(e) => setTodoInput(e.target.value)}
-            />
-            <button
-              className="bg-[#bcd4cb] hover:bg-[#a5c3b8] text-[#54402d] px-4 py-2 rounded-lg font-medium"
-              onClick={addTodo}
-            >
-              {editingIndex !== null ? "Update" : "Add"}
-            </button>
-          </div>
-          <ul className="space-y-2">
-            {todos.length === 0 && (
-              <li className="text-[#7c6f64] italic">No tasks yet 🌱</li>
-            )}
-            {todos.map((todo, index) => (
-              <li key={index} className="flex items-center justify-between">
-                <span className="text-[#54402d]">{todo}</span>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => startEditing(index)}
-                    className="text-[#bcd4cb] hover:text-[#a5c3b8]"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => deleteTodo(index)}
-                    className="text-red-500 hover:text-red-600"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Water Intake Tracker + Graph */}
+        {/* Water Intake Tracker */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Water Intake Tracker */}
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Water Intake Tracker 💧
-            </h3>
+            <h3 className="text-xl font-semibold text-[#54402d] mb-4">Water Intake Tracker 💧</h3>
             <p className="text-[#7c6f64] mb-2">Quick Add (ml):</p>
-            <div className="flex gap-2 mb-4 flex-wrap">
+            <div className="flex gap-2 mb-4">
               {[200, 250, 500].map((amount) => (
                 <button
                   key={amount}
@@ -222,42 +182,24 @@ const Dashboard = () => {
                 </button>
               ))}
             </div>
-            <p className="text-[#54402d] font-medium text-lg">
-              Total Today: {waterIntake}ml
-            </p>
+            <p className="text-[#54402d] font-medium text-lg">Total Today: {waterIntake}ml</p>
           </div>
 
           {/* Water Intake Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Weekly Water Intake
-            </h3>
-            <div className="w-full h-60">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={waterData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="ml" fill="#bcd4cb" />
-                </BarChart>
-              </ResponsiveContainer>
+            <h3 className="text-xl font-semibold text-[#54402d] mb-4">Weekly Water Intake</h3>
+            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
+              (Graph Placeholder - Connect to chart library later)
             </div>
           </div>
         </div>
 
-        {/* Sleep Tracker + Chart */}
+        {/* Sleep Tracker */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Sleep Tracker */}
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Sleep Tracker 🛌
-            </h3>
-
+            <h3 className="text-xl font-semibold text-[#54402d] mb-4">Sleep Tracker 🛌</h3>
             <div className="mb-4">
-              <label className="block text-[#7c6f64] mb-1">
-                Last Night's Sleep (hrs)
-              </label>
+              <label className="block text-[#7c6f64] mb-1">Last Night's Sleep (hrs)</label>
               <input
                 type="number"
                 min="0"
@@ -268,11 +210,8 @@ const Dashboard = () => {
                 className="w-full px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
               />
             </div>
-
             <div className="mb-4">
-              <label className="block text-[#7c6f64] mb-1">
-                Sleep Goal (hrs)
-              </label>
+              <label className="block text-[#7c6f64] mb-1">Sleep Goal (hrs)</label>
               <input
                 type="number"
                 min="0"
@@ -283,50 +222,15 @@ const Dashboard = () => {
                 className="w-full px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
               />
             </div>
-
-            <p className="text-[#54402d] font-medium text-lg">
-              Difference: {sleepHours - sleepGoal} hrs
-            </p>
+            <p className="text-[#54402d] font-medium text-lg">Difference: {sleepHours - sleepGoal} hrs</p>
           </div>
 
           {/* Sleep Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Weekly Sleep Hours
-            </h3>
-            <div className="w-full h-60">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={sleepData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="hours" fill="#bcd4cb" />
-                </BarChart>
-              </ResponsiveContainer>
+            <h3 className="text-xl font-semibold text-[#54402d] mb-4">Weekly Sleep Hours</h3>
+            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
+              (Graph Placeholder - Connect to chart library later)
             </div>
-          </div>
-        </div>
-
-        {/* Calendar */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
-          <h3 className="text-xl font-semibold mb-4 text-[#54402d]">
-            Calendar
-          </h3>
-          <div className="grid grid-cols-7 gap-2 text-center text-sm text-[#6d5d4c]">
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <div key={day} className="font-medium">
-                {day}
-              </div>
-            ))}
-            {Array.from({ length: 30 }, (_, i) => (
-              <div
-                key={i}
-                className="bg-[#fefce8] hover:bg-[#edebd3] rounded-lg py-2"
-              >
-                {i + 1}
-              </div>
-            ))}
           </div>
         </div>
       </main>

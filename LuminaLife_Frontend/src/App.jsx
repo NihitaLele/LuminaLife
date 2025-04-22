@@ -14,6 +14,9 @@ const Services = React.lazy(() => import("./Components/Services"));
 const DashBoard = React.lazy(() => import("./Components/DashBoard"));
 const Meditation = React.lazy(() => import("./Components/Meditation"));
 const CreateProfile = React.lazy(() => import("./Components/CreateProfile"));
+const Profile = React.lazy(() => import("./Components/Profile"));
+const GratitudeWall = React.lazy(() => import("./Components/GratitudeWall"));
+
 
 
 const App = () => {
@@ -28,14 +31,15 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Services" element={<Services />} />
+          <Route path="CreateProfile" element={<CreateProfile/>} />
 
           {/* Dashboard + Nested Layout */}
           <Route path="/DashBoardLayout" element={<DashBoardLayout />}>
             <Route index element={<DashBoard />} /> {/* Default subroute */}
             <Route path="DashBoard" element={<DashBoard />} />
             <Route path="Meditation" element={<Meditation />} />
-            <Route path="CreateProfile" element={<CreateProfile/>} />
-            {/* <Route path="Insights" element={<Insights />} /> */}
+            <Route path="Profile" element={<Profile />} />
+            <Route path="GratitudeWall" element={<GratitudeWall />} />
           </Route>
         </Routes>
       </Suspense>
