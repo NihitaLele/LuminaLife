@@ -37,7 +37,7 @@ const DashBoardLayout = () => {
                   : "hover:bg-[#a5c3b8] text-[#54402d]"
               }`}
             >
-              <FaSpa /> Meditate
+              <FaSpa /> Meditate & Ambient Sounds
             </button>
 
             <button

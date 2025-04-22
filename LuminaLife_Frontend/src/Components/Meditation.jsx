@@ -216,9 +216,9 @@ const Meditation = () => {
 
   {/* Atmospheric Sounds */}
   <div>
-    <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">🏙️ Urban & Cozy Sounds</h3>
+    <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">🏡Relaxing Indoor Ambience</h3>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {["Coffee Shop", "Library", "Train Ride", "City Rain", "Campfire"].map((sound) => (
+      {["Cat Purring", "Keyboard Typing", "Pages"].map((sound) => (
         <button
           key={sound}
           onClick={() => {
