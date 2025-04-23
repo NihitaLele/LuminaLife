@@ -41,14 +41,14 @@ const DashBoardLayout = () => {
             </button>
 
             <button
-              onClick={() => navigate("/DashBoardLayout/GratitudeWall")}
+              onClick={() => navigate("/DashBoardLayout/Journal")}
               className={`flex items-center gap-3 w-full text-left px-2 py-2 rounded-lg ${
                 location.pathname === "/DashBoardLayout/Insights"
                   ? "bg-[#bcd4cb] text-[#54402d]"
                   : "hover:bg-[#a5c3b8] text-[#54402d]"
               }`}
             >
-              <FaHeart /> Gratitude Wall
+              <FaHeart /> Journal
             </button>
             <button
               onClick={() => navigate("/DashBoardLayout/Profile")}

@@ -22,11 +22,6 @@ const Profile = ({ profile }) => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    // Prevent age from going below 1
-    if (name === "age") {
-      const numericValue = Number(value);
-      if (numericValue < 1) return; // do nothing if < 1
-    }
 
     setProfileData((prev) => ({
       ...prev,

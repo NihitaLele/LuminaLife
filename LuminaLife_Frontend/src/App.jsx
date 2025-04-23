@@ -15,7 +15,7 @@ const DashBoard = React.lazy(() => import("./Components/DashBoard"));
 const Meditation = React.lazy(() => import("./Components/Meditation"));
 const CreateProfile = React.lazy(() => import("./Components/CreateProfile"));
 const Profile = React.lazy(() => import("./Components/Profile"));
-const GratitudeWall = React.lazy(() => import("./Components/GratitudeWall"));
+const Journal = React.lazy(() => import("./Components/Journal"));
 
 
 
@@ -39,7 +39,7 @@ const App = () => {
             <Route path="DashBoard" element={<DashBoard />} />
             <Route path="Meditation" element={<Meditation />} />
             <Route path="Profile" element={<Profile />} />
-            <Route path="GratitudeWall" element={<GratitudeWall />} />
+            <Route path="Journal" element={<Journal />} />
           </Route>
         </Routes>
       </Suspense>

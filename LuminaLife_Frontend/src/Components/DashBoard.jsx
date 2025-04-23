@@ -15,6 +15,7 @@ const Dashboard = () => {
         const updatedTodos = [...todos];
         updatedTodos[editingIndex] = todoInput.trim();
         setTodos(updatedTodos);
+        
         setEditingIndex(null);
       } else {
         setTodos([...todos, todoInput.trim()]);
