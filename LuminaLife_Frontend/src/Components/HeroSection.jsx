@@ -237,7 +237,7 @@ const HeroSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <strong className="text-[#54402d]">Gratitude Wall</strong>
+                    <strong className="text-[#54402d]">Personal Journal</strong>
                   </div>
                 </li>
               </ul>

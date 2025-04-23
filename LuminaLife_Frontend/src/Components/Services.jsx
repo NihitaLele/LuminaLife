@@ -219,10 +219,10 @@ const Services = () => {
                       </svg>
                     </div>
                     <div>
-                      <strong className="text-[#54402d]">Gratitude Wall</strong>
+                      <strong className="text-[#54402d]">Personal Journal</strong>
                       <p className="text-gray-600">
                         Capture moments of appreciation with beautiful visual
-                        cards
+                        cards and affirmations
                       </p>
                     </div>
                   </li>
