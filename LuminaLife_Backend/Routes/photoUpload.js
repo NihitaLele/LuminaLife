@@ -3,6 +3,7 @@ import multer from "multer";
 import { storage } from "../Utils/cloudinaryConfig.js";
 import userProfile from "../Model/userProfile.js";
 import Auth from "../Middlewares/Authentication.js"
+import showProfile from "../Controller/userProfile.js"
 
 const upload = multer({ storage });
 
@@ -32,5 +33,7 @@ router.post("/upload",Auth, upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Something went wrong!" });
   }
 });
+
+router.get("/showProfile", Auth, showProfile)
 
 export default router;
