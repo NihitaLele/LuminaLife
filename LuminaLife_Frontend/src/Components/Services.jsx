@@ -23,9 +23,9 @@ const Services = () => {
             </p>
           </div>
 
-          {/* Categories Grid */}
+       
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Mind Category */}
+          
             <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
               <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
                 <div className="text-4xl mb-2">🧠</div>
@@ -119,7 +119,7 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Body Category */}
+           
             <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
               <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
                 <div className="text-4xl mb-2">💪</div>
@@ -187,7 +187,7 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Lifestyle Category */}
+          
             <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
               <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
                 <div className="text-4xl mb-2">🌱</div>

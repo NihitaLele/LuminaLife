@@ -5,8 +5,8 @@ const Dashboard = () => {
   const [todos, setTodos] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [waterIntake, setWaterIntake] = useState(0);
-  const [sleepHours, setSleepHours] = useState(7);
-  const [sleepGoal, setSleepGoal] = useState(8);
+  const [sleepHours, setSleepHours] = useState(0);
+  const [sleepGoal, setSleepGoal] = useState(0);
   const [thought, setThought] = useState("Loading...");
 
   const addTodo = () => {
@@ -39,7 +39,7 @@ const Dashboard = () => {
       try {
         const response = await fetch("https://api.api-ninjas.com/v1/advice", {
           headers: {
-            "X-Api-Key": "YOUR_API_KEY", // Replace with your own API key
+            "X-Api-Key": "YOUR_API_KEY", //gotta add API key here, will add later
           },
         });
         const data = await response.json();
@@ -77,18 +77,16 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
       <main className="flex-1 p-6 grid gap-6">
-        {/* Welcome Section */}
+
         <div className="bg-white rounded-2xl shadow-lg p-6">
           <h2 className="text-2xl font-bold text-[#54402d]">Hey Nihita 🌸</h2>
           <p className="text-[#7c6f64] mt-1">Hope you’re feeling awesome today!</p>
         </div>
 
-        {/* Thought of the Day */}
         <div className="bg-[#fef3c7] border-l-4 border-amber-400 text-[#6d5d4c] p-4 rounded-xl shadow-sm">
           <p className="italic font-medium">{thought} 💫</p>
         </div>
 
-        {/* To-Do Section */}
         <div className="bg-white rounded-2xl shadow-md p-6">
           <h3 className="text-xl font-semibold text-[#54402d] mb-4">Your To-Do List</h3>
           <div className="flex gap-2 mb-4">
@@ -131,7 +129,8 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Daily Check-in */}
+
+
           <div className="bg-white from-teal-50 to-cyan-50 p-6 rounded-xl shadow-sm">
             <h3 className="text-lg font-medium text-gray-800 mb-3">
               Daily Check-in❤️
@@ -156,24 +155,22 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Charts/Tracking */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
               Your Weekly Mood
             </h3>
             <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (Graph Placeholder - Connect to chart library later)
+              (For Graph, later will connect to chart library)
             </div>
           </div>
         </div>
 
-        {/* Water Intake Tracker */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">Water Intake Tracker 💧</h3>
             <p className="text-[#7c6f64] mb-2">Quick Add (ml):</p>
             <div className="flex gap-2 mb-4">
-              {[200, 250, 500].map((amount) => (
+              {[100, 150, 200, 250, 500].map((amount) => (
                 <button
                   key={amount}
                   onClick={() => setWaterIntake((prev) => prev + amount)}
@@ -186,16 +183,14 @@ const Dashboard = () => {
             <p className="text-[#54402d] font-medium text-lg">Total Today: {waterIntake}ml</p>
           </div>
 
-          {/* Water Intake Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">Weekly Water Intake</h3>
             <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (Graph Placeholder - Connect to chart library later)
+              (For Graph, later will connect to chart library)
             </div>
           </div>
         </div>
 
-        {/* Sleep Tracker */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">Sleep Tracker 🛌</h3>
@@ -226,11 +221,10 @@ const Dashboard = () => {
             <p className="text-[#54402d] font-medium text-lg">Difference: {sleepHours - sleepGoal} hrs</p>
           </div>
 
-          {/* Sleep Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">Weekly Sleep Hours</h3>
             <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (Graph Placeholder - Connect to chart library later)
+              (For Graph, later will connect to chart library)
             </div>
           </div>
         </div>

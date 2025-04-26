@@ -21,7 +21,6 @@ const AboutUs = () => {
             </p>
           </div>
 
-          {/* Our Story Section */}
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
             <div className="lg:w-1/2">
               <img
@@ -185,13 +184,13 @@ const AboutUs = () => {
             </div>
           </div>
 
-          {/* Testimonials */}
+     
           <div className="mb-16">
             <h3 className="text-2xl font-semibold text-[#54402d] text-center mb-12">
               What Our Community Says
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Testimonial 1 */}
+          
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -228,7 +227,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* Testimonial 2 */}
+          
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -265,7 +264,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* Testimonial 3 */}
+       
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">

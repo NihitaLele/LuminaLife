@@ -1,5 +1,4 @@
 import React from "react";
-import HeroSection from "../Components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {

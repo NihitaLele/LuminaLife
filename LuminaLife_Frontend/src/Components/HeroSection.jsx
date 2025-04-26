@@ -68,9 +68,9 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* Categories Grid - Condensed Version */}
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Mind Category */}
+     
+
           <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
             <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
               <div className="text-4xl mb-2">🧠</div>
@@ -128,7 +128,8 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Body Category */}
+      
+
           <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
             <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
               <div className="text-4xl mb-2">💪</div>
@@ -186,7 +187,8 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Lifestyle Category */}
+     
+
           <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-transform duration-300 hover:shadow-md hover:-translate-y-1">
             <div className="bg-[#d8e2dc] p-4 flex items-center justify-center">
               <div className="text-4xl mb-2">🌱</div>
@@ -245,7 +247,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* See All Services Button */}
+   
         <div className="text-center mb-16">
           <button
             onClick={() => navigate("/Services")}
@@ -256,7 +258,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Feature Highlight */}
+
       <div className="bg-white rounded-xl p-8 shadow-sm mb-16">
         <div className="text-center mb-10">
           <h3 className="text-2xl font-semibold text-[#54402d] mb-3">
@@ -350,7 +352,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
+
       <div className="bg-amber-50 rounded-xl p-10 text-center">
         <h3 className="text-2xl font-semibold text-[#54402d] mb-4">
           Ready to Begin Your Wellness Journey?

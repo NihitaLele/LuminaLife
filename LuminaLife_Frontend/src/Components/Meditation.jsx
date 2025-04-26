@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Meditation = () => {
   const [selectedTime, setSelectedTime] = useState(5);
-  const [timeLeft, setTimeLeft] = useState(5 * 60); 
+  const [timeLeft, setTimeLeft] = useState(5 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [showComplete, setShowComplete] = useState(false);
   const [selectedSound, setSelectedSound] = useState(null);
@@ -16,7 +16,7 @@ const Meditation = () => {
     return `${mins}:${secs}`;
   };
 
-  // Timer countdown
+ 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
       timerRef.current = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -27,31 +27,33 @@ const Meditation = () => {
     return () => clearTimeout(timerRef.current);
   }, [isRunning, timeLeft]);
 
-  // Update timer on time change
   useEffect(() => {
     setTimeLeft(selectedTime * 60);
     setIsRunning(false);
     setShowComplete(false);
   }, [selectedTime]);
 
-  // Sound switching
   useEffect(() => {
     if (selectedSound) {
-      // Stop any existing sound
+
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
-  
-      const audio = new Audio(`/sounds/${selectedSound.toLowerCase().replace(/\s/g, "")}.mp3`);
+
+      const audio = new Audio(
+        `/sounds/${selectedSound.toLowerCase().replace(/\s/g, "")}.mp3`
+      );
       audio.loop = true;
       audioRef.current = audio;
-  
+
       if (isSoundPlaying) {
-        audio.play().catch((err) => console.error("Audio playback error:", err));
+        audio
+          .play()
+          .catch((err) => console.error("Audio playback error:", err));
       }
     }
-  
+
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -59,8 +61,8 @@ const Meditation = () => {
       }
     };
   }, [selectedSound, isSoundPlaying]);
-  
-  // Play or pause ambient sound
+
+
   const toggleSound = () => {
     if (!audioRef.current) return;
     if (isSoundPlaying) {
@@ -92,7 +94,6 @@ const Meditation = () => {
           Select a duration and sound, then start your session.
         </p>
 
-        {/* Timer Block */}
         <div className="flex flex-col md:flex-row items-center justify-between bg-[#fefae0] px-8 py-6 rounded-2xl mb-8 shadow-xl gap-6">
           <div className="text-center">
             <span className="text-5xl font-semibold text-[#5e503f]">
@@ -140,117 +141,136 @@ const Meditation = () => {
           </div>
         </div>
 
-{/* Ambient Sound Categories */}
-<div className="mb-8 space-y-6">
-  {/* Nature Sounds */}
-  <div>
-    <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">🌿 Nature Sounds</h3>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {["Rain", "Forest", "Waves", "Fireplace", "Birdsong", "River"].map((sound) => (
-        <button
-          key={sound}
-          onClick={() => {
-            if (selectedSound === sound && isSoundPlaying) {
-              audioRef.current?.pause();
-              setIsSoundPlaying(false);
-              setSelectedSound(null);
-            } else {
-              setSelectedSound(sound);
-              setIsSoundPlaying(true);
-            }
-          }}
-          className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
-            selectedSound === sound
-              ? "ring-2 ring-[#d9ed92]"
-              : "hover:ring-2 hover:ring-[#f1efc7]"
-          }`}
-          style={{
-            backgroundImage: `url(/images/sounds/${sound.toLowerCase().replace(/\s/g, "")}.jpg)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            color: "white",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
-          <span className="relative z-10">🔊 {sound}</span>
-        </button>
-      ))}
-    </div>
-  </div>
+        {/* Ambient Sounds */}
+        <div className="mb-8 space-y-6">
+          {/* Nature Sounds */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
+              🌿 Nature Sounds
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                "Rain",
+                "Forest",
+                "Waves",
+                "Fireplace",
+                "Birdsong",
+                "River",
+              ].map((sound) => (
+                <button
+                  key={sound}
+                  onClick={() => {
+                    if (selectedSound === sound && isSoundPlaying) {
+                      audioRef.current?.pause();
+                      setIsSoundPlaying(false);
+                      setSelectedSound(null);
+                    } else {
+                      setSelectedSound(sound);
+                      setIsSoundPlaying(true);
+                    }
+                  }}
+                  className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
+                    selectedSound === sound
+                      ? "ring-2 ring-[#d9ed92]"
+                      : "hover:ring-2 hover:ring-[#f1efc7]"
+                  }`}
+                  style={{
+                    backgroundImage: `url(/images/sounds/${sound
+                      .toLowerCase()
+                      .replace(/\s/g, "")}.jpg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    color: "white",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                  <span className="relative z-10">🔊 {sound}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
-  {/* Musical Sounds */}
-  <div>
-    <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">🎵 Musical & Tonal Sounds</h3>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {["Chimes", "Soft Piano", "Binaural Beats"].map((sound) => (
-        <button
-          key={sound}
-          onClick={() => {
-            if (selectedSound === sound && isSoundPlaying) {
-              audioRef.current?.pause();
-              setIsSoundPlaying(false);
-              setSelectedSound(null);
-            } else {
-              setSelectedSound(sound);
-              setIsSoundPlaying(true);
-            }
-          }}
-          className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
-            selectedSound === sound
-              ? "ring-2 ring-[#d9ed92]"
-              : "hover:ring-2 hover:ring-[#f1efc7]"
-          }`}
-          style={{
-            backgroundImage: `url(/images/sounds/${sound.toLowerCase().replace(/\s/g, "")}.jpg)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            color: "white",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
-          <span className="relative z-10">🔊 {sound}</span>
-        </button>
-      ))}
-    </div>
-  </div>
+          {/* Musical Sounds */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
+              🎵 Musical & Tonal Sounds
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {["Chimes", "Soft Piano", "Binaural Beats"].map((sound) => (
+                <button
+                  key={sound}
+                  onClick={() => {
+                    if (selectedSound === sound && isSoundPlaying) {
+                      audioRef.current?.pause();
+                      setIsSoundPlaying(false);
+                      setSelectedSound(null);
+                    } else {
+                      setSelectedSound(sound);
+                      setIsSoundPlaying(true);
+                    }
+                  }}
+                  className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
+                    selectedSound === sound
+                      ? "ring-2 ring-[#d9ed92]"
+                      : "hover:ring-2 hover:ring-[#f1efc7]"
+                  }`}
+                  style={{
+                    backgroundImage: `url(/images/sounds/${sound
+                      .toLowerCase()
+                      .replace(/\s/g, "")}.jpg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    color: "white",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                  <span className="relative z-10">🔊 {sound}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
-  {/* Atmospheric Sounds */}
-  <div>
-    <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">🏡Relaxing Indoor Ambience</h3>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {["Cat Purring", "Keyboard Typing", "Pages"].map((sound) => (
-        <button
-          key={sound}
-          onClick={() => {
-            if (selectedSound === sound && isSoundPlaying) {
-              audioRef.current?.pause();
-              setIsSoundPlaying(false);
-              setSelectedSound(null);
-            } else {
-              setSelectedSound(sound);
-              setIsSoundPlaying(true);
-            }
-          }}
-          className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
-            selectedSound === sound
-              ? "ring-2 ring-[#d9ed92]"
-              : "hover:ring-2 hover:ring-[#f1efc7]"
-          }`}
-          style={{
-            backgroundImage: `url(/images/sounds/${sound.toLowerCase().replace(/\s/g, "")}.jpg)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            color: "white",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
-          <span className="relative z-10">🔊 {sound}</span>
-        </button>
-      ))}
-    </div>
-  </div>
-</div>
-        {/* Completion */}
+          {/* Atmospheric Sounds */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
+              🏡Relaxing Indoor Ambience
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {["Cat Purring", "Keyboard Typing", "Pages"].map((sound) => (
+                <button
+                  key={sound}
+                  onClick={() => {
+                    if (selectedSound === sound && isSoundPlaying) {
+                      audioRef.current?.pause();
+                      setIsSoundPlaying(false);
+                      setSelectedSound(null);
+                    } else {
+                      setSelectedSound(sound);
+                      setIsSoundPlaying(true);
+                    }
+                  }}
+                  className={`relative overflow-hidden py-12 px-4 rounded-xl text-base font-semibold shadow-md transition group ${
+                    selectedSound === sound
+                      ? "ring-2 ring-[#d9ed92]"
+                      : "hover:ring-2 hover:ring-[#f1efc7]"
+                  }`}
+                  style={{
+                    backgroundImage: `url(/images/sounds/${sound
+                      .toLowerCase()
+                      .replace(/\s/g, "")}.jpg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    color: "white",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                  <span className="relative z-10">🔊 {sound}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {showComplete && (
           <div className="text-center text-[#4a4a4a] mt-4 text-lg font-medium">
             ✅ Meditation complete! Great job 🌟

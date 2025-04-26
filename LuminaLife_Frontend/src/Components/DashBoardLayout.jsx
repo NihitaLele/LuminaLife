@@ -8,7 +8,8 @@ const DashBoardLayout = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
+     
+
       <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
         <div>
           <div className="mb-8 text-center">
@@ -68,7 +69,7 @@ const DashBoardLayout = () => {
         </button>
       </aside>
 
-      {/* Main Content */}
+
       <main className="flex-1 bg-[#f5f5f5] p-6 overflow-y-auto">
         <Outlet />
       </main>

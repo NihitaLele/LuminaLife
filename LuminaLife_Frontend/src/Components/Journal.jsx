@@ -33,6 +33,8 @@ const Journal = () => {
         color: pastelColors[Math.floor(Math.random() * pastelColors.length)],
       };
       setGratitudeList([...gratitudeList, newNote]);
+      // console.log(gratitudeList)
+      localStorage.setItem("gratitude", newNote.text)
       setGratitudeInput("");
     }
   };
@@ -48,12 +50,12 @@ const Journal = () => {
         🌟 My Personal Journal 🌟
       </h3>
 
-      {/* Affirmation */}
+   
       <div className="bg-[#fffaf0] p-4 rounded-xl border border-[#e5ded5] text-center shadow-sm">
         <p className="text-[#4f3e2a] italic">💬 {affirmation}</p>
       </div>
 
-      {/* Input */}
+
       <div className="flex gap-9 justify-center">
         <textarea
           rows={3}
@@ -70,7 +72,7 @@ const Journal = () => {
         </button>
       </div>
 
-      {/* Notes Grid */}
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <AnimatePresence>
           {gratitudeList.length === 0 ? (
