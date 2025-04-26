@@ -25,7 +25,7 @@ const App = () => {
       <Navbar />
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* Public Routes */}
+         
           <Route path="/" element={<HeroSection />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
@@ -33,9 +33,9 @@ const App = () => {
           <Route path="/Services" element={<Services />} />
           <Route path="CreateProfile" element={<CreateProfile/>} />
 
-          {/* Dashboard + Nested Layout */}
+     
           <Route path="/DashBoardLayout" element={<DashBoardLayout />}>
-            <Route index element={<DashBoard />} /> {/* Default subroute */}
+            <Route index element={<DashBoard />} /> 
             <Route path="DashBoard" element={<DashBoard />} />
             <Route path="Meditation" element={<Meditation />} />
             <Route path="Profile" element={<Profile />} />
