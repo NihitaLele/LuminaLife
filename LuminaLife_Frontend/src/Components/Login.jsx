@@ -19,8 +19,9 @@ const Login = () => {
       .post("http://localhost:3000/loginUser", userData)
       .then((response) => {
         console.log(response);
+        localStorage.setItem("token", response.data.token)
         alert("User Logged in");
-        navigate("/DashBoardLayout/DashBoard");
+        navigate("/CreateProfile");
       })
       .catch((error) => {
         console.log(error);

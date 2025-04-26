@@ -1,6 +1,9 @@
-// cloudinaryConfig.js
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+import { config } from 'dotenv';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+
+// Load environment variables from .env file
+config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,12 +14,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'uploads', // change this to your desired folder
+    folder: 'uploads', // your desired folder
     allowed_formats: ['jpg', 'png', 'jpeg'],
   },
 });
 
-module.exports = {
-  cloudinary,
-  storage,
-};
+export { cloudinary, storage };

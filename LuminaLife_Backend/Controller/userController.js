@@ -39,7 +39,7 @@ export const login = async(req, res)=>{
         if(user){
             bcrypt.compare(pass, user.dataValues.Password, async function (err, result) {
                 if(result==true){
-                    const token = jwt.sign({user}, "helllo")
+                    const token = jwt.sign({id: user.id}, "helllo")
                     res.status(200).json({token})
                 }
                 else{

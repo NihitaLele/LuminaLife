@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
+import axios from 'axios';
+
 
 const CreateProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -8,7 +10,7 @@ const CreateProfile = () => {
     bio: "",
     gender: "",
     interests: "",
-    photo: null,
+    image: null,
   });
 
   const handleChange = (e) => {
@@ -19,9 +21,49 @@ const CreateProfile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Profile submitted:", profileData);
+    
+
+    // Create FormData object for multipart/form-data
+    const formData = new FormData();
+    
+    // Append all form fields to FormData
+    Object.keys(profileData).forEach(key => {
+      if (profileData[key] !== null && profileData[key] !== "") {
+        console.log("appending data")
+        formData.append(key, profileData[key]);
+        console.log("data appended")
+      }
+    });
+    
+    try {
+      // Send the POST request with FormData
+
+       axios.post('http://localhost:3000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization : localStorage.getItem("token")
+        },
+      }).then((res)=>{
+        console.log(res)
+      }).catch((error)=>{
+        console.log(error)
+      });
+      
+      console.log(formData)
+      
+      console.log(profileData)
+      
+      console.log("Profile submitted:", profileData);
+    
+      
+      // You can add success handling here if needed
+      
+    } catch (error) {
+      console.log("Error submitting profile:", error);
+      // You can add error handling here if needed
+    }
   };
 
   return (
@@ -41,14 +83,14 @@ const CreateProfile = () => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" encType="multipart/form-data">
         <div>
           <label className="block text-sm font-medium text-[#6d5c4f] mb-1">
             Profile Picture
           </label>
           <input
             type="file"
-            name="photo"
+            name="image"
             accept="image/*"
             onChange={handleChange}
             className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#bcd4cb] file:text-[#54402d] hover:file:bg-[#a5c3b8]"

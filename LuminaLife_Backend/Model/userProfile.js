@@ -31,6 +31,10 @@ const userProfile = db.define("userProfile",
         Bio : {
             type : DataTypes.STRING,
             allowNull : true
+        },
+        Interests : {
+            type : DataTypes.STRING,
+            allowNull : true
         }
     }
 )
