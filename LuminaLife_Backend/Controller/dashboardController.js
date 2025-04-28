@@ -42,3 +42,17 @@ export const addWater = async(req, res) =>{
         res.status(500).json({message : "Sommething went wrong"})
     }
 }
+
+export const addSleep = async(req, res) =>{
+    try{
+        await userDashboardModel.update(
+            { SleepTracker : req.body.hrs}, 
+            { where: { UserId: req.user.id } }    
+          );
+          res.status(201).json({message : "SleepTracker added"})
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).json({message : "Sommething went wrong"})
+    }
+}

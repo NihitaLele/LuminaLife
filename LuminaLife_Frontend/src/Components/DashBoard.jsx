@@ -7,7 +7,6 @@ const Dashboard = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [waterIntake, setWaterIntake] = useState(0);
   const [sleepHours, setSleepHours] = useState(0);
-  const [sleepGoal, setSleepGoal] = useState(0);
   const [thought, setThought] = useState("Loading...");
 
   const addTodo = () => {
@@ -90,7 +89,7 @@ const Dashboard = () => {
     setWaterIntake(updatedWaterIntake); // ✅ update React state
 
     const data = {
-      ml: updatedWaterIntake,   // ✅ send correct value
+      ml: updatedWaterIntake   // ✅ send correct value
     };
 
     axios.post("http://localhost:3000/addWater", data, {
@@ -105,15 +104,21 @@ const Dashboard = () => {
 }
 
 
-  const sleepData = [
-    { day: "Mon", hours: 7 },
-    { day: "Tue", hours: 6.5 },
-    { day: "Wed", hours: 8 },
-    { day: "Thu", hours: 7 },
-    { day: "Fri", hours: 5.5 },
-    { day: "Sat", hours: 9 },
-    { day: "Sun", hours: 7.5 },
-  ];
+  function sleepData(){
+    const data = {
+      hrs : sleepHours
+    }
+
+    axios.post("http://localhost:3000/addSleep", data, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
@@ -243,52 +248,59 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Sleep Tracker 🛌
-            </h3>
-            <div className="mb-4">
-              <label className="block text-[#7c6f64] mb-1">
-                Last Night's Sleep (hrs)
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="24"
-                step="0.1"
-                value={sleepHours}
-                onChange={(e) => setSleepHours(parseFloat(e.target.value))}
-                className="w-full px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-[#7c6f64] mb-1">
-                Sleep Goal (hrs)
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="24"
-                step="0.1"
-                value={sleepGoal}
-                onChange={(e) => setSleepGoal(parseFloat(e.target.value))}
-                className="w-full px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
-              />
-            </div>
-            <p className="text-[#54402d] font-medium text-lg">
-              Difference: {sleepHours - sleepGoal} hrs
-            </p>
-          </div>
+  {/* Sleep Tracker Card */}
+  <div className="bg-white rounded-2xl shadow-md p-6">
+    <h3 className="text-xl font-semibold text-[#54402d] mb-4">
+      Sleep Tracker 🛌
+    </h3>
 
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Weekly Sleep Hours
-            </h3>
-            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (For Graph, later will connect to chart library)
-            </div>
-          </div>
-        </div>
+    {/* Sleep Input */}
+    <div className="mb-4">
+      <label className="block text-[#7c6f64] mb-1">
+        Last Night's Sleep (hrs)
+      </label>
+      <input
+        type="number"
+        min="0"
+        max="24"
+        step="0.1"
+        value={sleepHours}
+        onChange={(e) => setSleepHours(parseFloat(e.target.value))}
+        className="w-full px-4 py-2 rounded-lg border border-[#d6d3cc] focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
+      />
+    </div>
+
+   
+    <div className="mb-4">
+      <label className="block text-[#7c6f64] mb-1">
+        Sleep Goal (hrs)
+      </label>
+      <p className="text-[#54402d] font-medium">8</p> 
+    </div>
+
+    
+    <p className="text-[#54402d] font-medium text-lg mb-4">
+      Difference: {sleepHours - 8} hrs
+    </p>
+
+    <button
+      onClick={sleepData}
+      className="bg-[#bcd4cb] text-[#54402d] font-semibold px-6 py-2 rounded-lg hover:bg-[#a8c4b8] transition duration-300"
+    >
+      Add
+    </button>
+  </div>
+
+  <div className="bg-white rounded-2xl shadow-md p-6">
+    <h3 className="text-xl font-semibold text-[#54402d] mb-4">
+      Weekly Sleep Hours
+    </h3>
+    <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
+      (For Graph, later will connect to chart library)
+    </div>
+  </div>
+</div>
+
       </main>
     </div>
   );
