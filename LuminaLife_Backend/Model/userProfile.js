@@ -6,35 +6,36 @@ const userProfile = db.define("userProfile",
         id: {
             type : DataTypes.INTEGER,
             autoIncrement : true,
-            primaryKey : true
+            primaryKey : true,
+            unique : true
         },
         Profile : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Name : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Age : {
             type : DataTypes.INTEGER,
-            allowNull : true
+            allowNull : false
         },
         DOB : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Gender : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Bio : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Interests : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         }
     }
 )

@@ -7,20 +7,21 @@ import { db } from "../Database/mySql.js";
         id : {
             type : DataTypes.INTEGER,
             autoIncrement : true,
-            primaryKey : true
+            primaryKey : true,
+            unique : true
         },
         Name : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         },
         Email : {
             type : DataTypes.STRING,
             unique : true,
-            allowNull : true
+            allowNull : false
         },
         Password : {
             type : DataTypes.STRING,
-            allowNull : true
+            allowNull : false
         }
     }
 )

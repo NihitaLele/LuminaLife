@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios"
 
 const Dashboard = () => {
   const [todoInput, setTodoInput] = useState("");
@@ -10,19 +11,29 @@ const Dashboard = () => {
   const [thought, setThought] = useState("Loading...");
 
   const addTodo = () => {
-    if (todoInput.trim() !== "") {
-      if (editingIndex !== null) {
-        const updatedTodos = [...todos];
-        updatedTodos[editingIndex] = todoInput.trim();
-        setTodos(updatedTodos);
-        
-        setEditingIndex(null);
-      } else {
-        setTodos([...todos, todoInput.trim()]);
+    const updatedTodos = [...todos, todoInput]; // create updated array first
+  
+    setTodos(updatedTodos); // update React state
+  
+    const data = {
+      todo: updatedTodos   // send the correct new array
+    };
+  
+    axios.post("http://localhost:3000/addTodo", data, {
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
-      setTodoInput("");
-    }
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  
+    console.log(updatedTodos); // this will show updated todos correctly
   };
+  
+
+  
 
   const deleteTodo = (index) => {
     const updated = todos.filter((_, i) => i !== index);

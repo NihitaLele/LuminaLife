@@ -4,6 +4,7 @@ import { storage } from "../Utils/cloudinaryConfig.js";
 import userProfile from "../Model/userProfile.js";
 import Auth from "../Middlewares/Authentication.js"
 import showProfile from "../Controller/userProfile.js"
+import userDashboardModel from "../Model/userDashboardModel.js"
 
 const upload = multer({ storage });
 
@@ -26,6 +27,8 @@ router.post("/upload",Auth, upload.single("image"), async (req, res) => {
       Interests : req.body.interests,
       UserId : req.user.id
     });
+
+await userDashboardModel.create({UserId : req.user.id})
 
     res.status(200).json({ message: "Profile uploaded successfully!" });
   } catch (error) {
