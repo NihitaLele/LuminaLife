@@ -13,9 +13,8 @@ const DashBoardLayout = () => {
       <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
         <div>
           <div className="mb-8 text-center">
-            <div className="w-20 h-20 bg-[#bcd4cb] rounded-full mx-auto mb-2 border-4 border-[#a5c3b8]"></div>
-            <h2 className="text-lg font-semibold text-[#54402d]">Nihita 💖</h2>
-            <p className="text-sm text-gray-500">Welcome back!</p>
+            
+
           </div>
 
           <nav className="space-y-4 text-gray-700">

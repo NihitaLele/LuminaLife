@@ -56,3 +56,14 @@ export const addSleep = async(req, res) =>{
         res.status(500).json({message : "Sommething went wrong"})
     }
 }
+
+export const showDashboard = async(req, res) =>{
+    try{
+         const dashboard = await userDashboardModel.findOne({where : {UserId : req.user.id}})
+          res.status(201).json({dashboard})
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).json({message : "Sommething went wrong"})
+    }
+} 
