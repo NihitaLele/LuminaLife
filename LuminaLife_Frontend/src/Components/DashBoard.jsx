@@ -9,6 +9,21 @@ const Dashboard = () => {
   const [sleepHours, setSleepHours] = useState(0);
   const [thought, setThought] = useState("Loading...");
   const [dasboardData, setDashboardData] = useState({});
+  const [selectedMood, setSelectedMood] = useState(null);
+  const [name, setName] = useState("")
+
+  useEffect(()=>{
+    axios
+    .get("http://localhost:3000/showProfile", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((res)=>{
+      setName(res.data.Name)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }, [])
 
   useEffect(() => {
     axios
@@ -60,6 +75,7 @@ const Dashboard = () => {
 
   function setMood(item) {
     console.log(item.emoji);
+    setSelectedMood(item);
     const data = {
       emoji: item.emoji,
     };
@@ -149,13 +165,30 @@ const Dashboard = () => {
       });
   }
 
+  // Calculate sleep status
+  const getSleepStatus = () => {
+    const diff = sleepHours - 8;
+    if (diff >= 0) return { text: "Great! You met your goal", color: "text-green-600" };
+    if (diff >= -2) return { text: "Almost there!", color: "text-yellow-600" };
+    return { text: "Try to get more sleep", color: "text-red-500" };
+  };
+
+  // Calculate water status
+  const getWaterStatus = () => {
+    if (waterIntake >= 2000) return { text: "Excellent hydration!", color: "text-green-600" };
+    if (waterIntake >= 1000) return { text: "Getting there!", color: "text-yellow-600" };
+    return { text: "Drink more water", color: "text-red-500" };
+  };
+
+
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
       <main className="flex-1 p-6 grid gap-6">
         <div className="bg-white rounded-2xl shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-[#54402d]">Hey Nihita 🌸</h2>
+          <h2 className="text-2xl font-bold text-[#54402d]"> {`Hey ${name}`}🌸</h2>
           <p className="text-[#7c6f64] mt-1">
-            Hope you’re feeling awesome today!
+            Hope you're feeling awesome today!
           </p>
         </div>
 
@@ -224,7 +257,11 @@ const Dashboard = () => {
               ].map((item) => (
                 <button
                   key={item.label}
-                  className="bg-[#fefce8] hover:bg-[#e8f0ea] text-[#54402d] p-3 rounded-lg flex flex-col items-center w-16"
+                  className={`${
+                    selectedMood?.label === item.label 
+                      ? "bg-[#e8f0ea] ring-2 ring-[#bcd4cb]" 
+                      : "bg-[#fefce8] hover:bg-[#e8f0ea]"
+                  } text-[#54402d] p-3 rounded-lg flex flex-col items-center w-16 transition-all`}
                   onClick={() => setMood(item)}
                 >
                   <span className="text-xl">{item.emoji}</span>
@@ -234,12 +271,31 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* Mood Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Your Weekly Mood
+              Today's Mood
             </h3>
-            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (For Graph, later will connect to chart library)
+            <div className="bg-[#f8f8f2] rounded-lg p-6 flex flex-col items-center justify-center min-h-40 border-2 border-[#e8f0ea]">
+              {selectedMood ? (
+                <>
+                  <span className="text-5xl mb-2">{selectedMood.emoji}</span>
+                  <h4 className="text-xl font-medium text-[#54402d]">
+                    {selectedMood.label}
+                  </h4>
+                  <p className="text-[#7c6f64] mt-2 text-center">
+                    {selectedMood.label === "Great" && "What an amazing day!"}
+                    {selectedMood.label === "Good" && "You're doing well today!"}
+                    {selectedMood.label === "Okay" && "Hanging in there!"}
+                    {selectedMood.label === "Low" && "Take it easy today."}
+                    {selectedMood.label === "Poor" && "Be gentle with yourself today."}
+                  </p>
+                </>
+              ) : (
+                <p className="text-[#7c6f64] text-center">
+                  Click on a mood button to see your selection here! 💭
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -266,12 +322,36 @@ const Dashboard = () => {
             </p>
           </div>
 
+          {/* Water Intake Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Weekly Water Intake
+              Water Intake Status
             </h3>
-            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (For Graph, later will connect to chart library)
+            <div className="bg-[#edf6f9] rounded-lg p-6 flex flex-col items-center justify-center min-h-40 border-2 border-[#d0e8f2]">
+              <div className="w-full max-w-xs">
+                <div className="relative h-8 bg-gray-200 rounded-full overflow-hidden">
+                  <div 
+                    className="absolute top-0 left-0 h-full bg-blue-400 rounded-full transition-all"
+                    style={{ width: `${Math.min(100, (waterIntake / 2000) * 100)}%` }}
+                  ></div>
+                </div>
+                <div className="flex justify-between mt-1 text-xs text-gray-600">
+                  <span>0ml</span>
+                  <span>2000ml (daily goal)</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center mt-4">
+                <span className="text-4xl mr-3">💧</span>
+                <div>
+                  <p className="font-medium text-lg text-[#54402d]">
+                    {waterIntake}ml / 2000ml
+                  </p>
+                  <p className={`${getWaterStatus().color}`}>
+                    {getWaterStatus().text}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -316,12 +396,52 @@ const Dashboard = () => {
             </button>
           </div>
 
+          {/* Sleep Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
-              Weekly Sleep Hours
+              Sleep Status
             </h3>
-            <div className="w-full h-40 bg-[#e8f0ea] rounded-lg flex items-center justify-center text-[#7c6f64]">
-              (For Graph, later will connect to chart library)
+            <div className="bg-[#f5f0fe] rounded-lg p-6 flex flex-col items-center justify-center min-h-40 border-2 border-[#e6dbfc]">
+              <div className="flex items-center">
+                <span className="text-4xl mr-3">😴</span>
+                <div>
+                  <p className="font-medium text-lg text-[#54402d]">
+                    You slept {sleepHours} hours
+                  </p>
+                  <p className={`${getSleepStatus().color} font-medium`}>
+                    {getSleepStatus().text}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 w-full max-w-xs">
+                <div className="relative pt-1">
+                  <div className="flex mb-2 items-center justify-between">
+                    <div>
+                      <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-600 bg-purple-200">
+                        Sleep quality
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span 
+                        key={star}
+                        className={`text-xl ${
+                          sleepHours >= 7 && star <= 5 ? "text-yellow-500" :
+                          sleepHours >= 6 && star <= 4 ? "text-yellow-500" :
+                          sleepHours >= 5 && star <= 3 ? "text-yellow-500" :
+                          sleepHours >= 4 && star <= 2 ? "text-yellow-500" :
+                          sleepHours >= 1 && star <= 1 ? "text-yellow-500" :
+                          "text-gray-300"
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

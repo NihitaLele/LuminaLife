@@ -1,4 +1,5 @@
 import userDashboardModel from "../Model/userDashboardModel.js"
+import userProfile from "../Model/userProfile.js";
 
 export const addTodo = async(req, res) =>{
     try{
@@ -61,6 +62,17 @@ export const showDashboard = async(req, res) =>{
     try{
          const dashboard = await userDashboardModel.findOne({where : {UserId : req.user.id}})
           res.status(201).json({dashboard})
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).json({message : "Sommething went wrong"})
+    }
+} 
+
+export const showProfile = async(req, res) =>{
+    try{
+         const profile = await userProfile.findOne({where : {UserId : req.user.id}})
+          res.status(201).json({profile})
     }
     catch(error){
         console.log(error)
