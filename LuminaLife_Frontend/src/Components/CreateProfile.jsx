@@ -24,12 +24,8 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-
-    // Create FormData object for multipart/form-data
     const formData = new FormData();
     
-    // Append all form fields to FormData
     Object.keys(profileData).forEach(key => {
       if (profileData[key] !== null && profileData[key] !== "") {
         console.log("appending data")
@@ -39,8 +35,6 @@ const CreateProfile = () => {
     });
     
     try {
-      // Send the POST request with FormData
-
        axios.post('https://luminalife.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -52,18 +46,12 @@ const CreateProfile = () => {
         console.log(error)
       });
       
-      console.log(formData)
-      
-      console.log(profileData)
-      
+      console.log(formData)  
+      console.log(profileData)  
       console.log("Profile submitted:", profileData);
-    
-      
-      // You can add success handling here if needed
-      
+          
     } catch (error) {
       console.log("Error submitting profile:", error);
-      // You can add error handling here if needed
     }
   };
 

@@ -39,7 +39,7 @@ const SignUp = () => {
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6"
       >
         <img
-          src={SignUpPic} // Make sure this path is correct
+          src={SignUpPic}
           alt="Signup Illustration"
           className="w-24 h-24 mx-auto rounded-full object-cover shadow-sm"
         />

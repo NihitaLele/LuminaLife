@@ -8,15 +8,10 @@ const DashBoardLayout = () => {
 
   return (
     <div className="flex min-h-screen">
-     
-
-      <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
+     <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
         <div>
-          <div className="mb-8 text-center">
-            
-
+          <div className="mb-8 text-center">      
           </div>
-
           <nav className="space-y-4 text-gray-700">
             <button
               onClick={() => navigate("/DashBoardLayout/DashBoard")}

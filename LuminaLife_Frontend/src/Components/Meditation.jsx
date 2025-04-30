@@ -15,7 +15,6 @@ const Meditation = () => {
     const secs = String(seconds % 60).padStart(2, "0");
     return `${mins}:${secs}`;
   };
-
  
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
@@ -141,9 +140,7 @@ const Meditation = () => {
           </div>
         </div>
 
-        {/* Ambient Sounds */}
         <div className="mb-8 space-y-6">
-          {/* Nature Sounds */}
           <div>
             <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
               🌿 Nature Sounds
@@ -190,7 +187,6 @@ const Meditation = () => {
             </div>
           </div>
 
-          {/* Musical Sounds */}
           <div>
             <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
               🎵 Musical & Tonal Sounds
@@ -230,7 +226,7 @@ const Meditation = () => {
             </div>
           </div>
 
-          {/* Atmospheric Sounds */}
+       
           <div>
             <h3 className="text-xl font-semibold text-[#3e3e3e] mb-2">
               🏡Relaxing Indoor Ambience

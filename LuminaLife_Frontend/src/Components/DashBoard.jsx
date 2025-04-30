@@ -37,11 +37,10 @@ const Dashboard = () => {
 
         const dashboard = res.data.dashboard;
 
-        setTodos(dashboard.Todo); // Todo is coming as JSON string, so parse it
+        setTodos(dashboard.Todo); 
         setWaterIntake(dashboard.WaterIntake);
         setSleepHours(dashboard.SleepTracker);
-        // You can also store other dashboard fields if needed
-        setDashboardData(dashboard); // saving the full dashboard if needed later
+        setDashboardData(dashboard);
       })
       .catch((error) => {
         console.log(error);
@@ -49,9 +48,9 @@ const Dashboard = () => {
   }, []);
 
   const addTodo = () => {
-    const updatedTodos = [...todos, todoInput]; // create updated array first
+    const updatedTodos = [...todos, todoInput]; 
 
-    setTodos(updatedTodos); // update React state
+    setTodos(updatedTodos); 
 
     const data = {
       todo: updatedTodos, 
@@ -70,7 +69,7 @@ const Dashboard = () => {
         console.log(error);
       });
 
-    console.log(updatedTodos); // this will show updated todos correctly
+    console.log(updatedTodos); 
   };
 
   function setMood(item) {
@@ -108,7 +107,7 @@ const Dashboard = () => {
       try {
         const response = await fetch("https://api.api-ninjas.com/v1/advice", {
           headers: {
-            "X-Api-Key": "YOUR_API_KEY", //gotta add API key here, will add later
+            "X-Api-Key": "YOUR_API_KEY", 
           },
         });
         const data = await response.json();
@@ -124,12 +123,12 @@ const Dashboard = () => {
   }, []);
 
   function waterData(amount) {
-    const updatedWaterIntake = waterIntake + amount; // ✅ calculate manually
+    const updatedWaterIntake = waterIntake + amount; 
 
-    setWaterIntake(updatedWaterIntake); // ✅ update React state
+    setWaterIntake(updatedWaterIntake); 
 
     const data = {
-      ml: updatedWaterIntake, // ✅ send correct value
+      ml: updatedWaterIntake, 
     };
 
     axios
@@ -165,7 +164,6 @@ const Dashboard = () => {
       });
   }
 
-  // Calculate sleep status
   const getSleepStatus = () => {
     const diff = sleepHours - 8;
     if (diff >= 0) return { text: "Great! You met your goal", color: "text-green-600" };
@@ -173,14 +171,11 @@ const Dashboard = () => {
     return { text: "Try to get more sleep", color: "text-red-500" };
   };
 
-  // Calculate water status
   const getWaterStatus = () => {
     if (waterIntake >= 2000) return { text: "Excellent hydration!", color: "text-green-600" };
     if (waterIntake >= 1000) return { text: "Getting there!", color: "text-yellow-600" };
     return { text: "Drink more water", color: "text-red-500" };
   };
-
-
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-[#f9f7f3] to-[#e8f0ea]">
@@ -271,7 +266,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Mood Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
               Today's Mood
@@ -322,7 +316,6 @@ const Dashboard = () => {
             </p>
           </div>
 
-          {/* Water Intake Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
               Water Intake Status
@@ -396,7 +389,6 @@ const Dashboard = () => {
             </button>
           </div>
 
-          {/* Sleep Card instead of Chart */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-[#54402d] mb-4">
               Sleep Status
