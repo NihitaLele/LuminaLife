@@ -18,10 +18,14 @@ const Login = () => {
     axios
       .post("http://localhost:3000/loginUser", userData)
       .then((response) => {
-        console.log(response);
+        console.log(response.status);
         localStorage.setItem("token", response.data.token)
         alert("User Logged in");
-        navigate("/CreateProfile");
+        if(response.status==200){
+          navigate("/DashBoardLayout")
+        }else{
+         navigate("/CreateProfile");
+        }
       })
       .catch((error) => {
         console.log(error);

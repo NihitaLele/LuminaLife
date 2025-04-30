@@ -11,7 +11,8 @@ const Dashboard = db.define("Dashboard",
         },
         Todo : {
             type : DataTypes.JSON,
-            allowNull : true
+            allowNull : true,
+            defaultValue: [] 
         },
         CheckIn : {
             type : DataTypes.STRING,

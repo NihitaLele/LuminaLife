@@ -24,7 +24,7 @@ userDashboard.belongsTo(User)
 
 
 
-db.sync()
+db.sync({force: true})
 
 app.use(userRoute)
 app.use(photoUpload)

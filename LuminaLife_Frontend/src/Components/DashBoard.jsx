@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [waterIntake, setWaterIntake] = useState(0);
   const [sleepHours, setSleepHours] = useState(0);
   const [thought, setThought] = useState("Loading...");
-  const [dasboardData, setDashboardData] = useState({});
+  const [dashboardData, setDashboardData] = useState({});
   const [selectedMood, setSelectedMood] = useState(null);
   const [name, setName] = useState("")
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
         const dashboard = res.data.dashboard;
 
-        setTodos(JSON.parse(dashboard.Todo)); // Todo is coming as JSON string, so parse it
+        setTodos(dashboard.Todo); // Todo is coming as JSON string, so parse it
         setWaterIntake(dashboard.WaterIntake);
         setSleepHours(dashboard.SleepTracker);
         // You can also store other dashboard fields if needed

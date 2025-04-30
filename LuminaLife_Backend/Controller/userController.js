@@ -2,6 +2,7 @@ import { where } from "sequelize"
 import User from "../Model/userModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import userProfile from "../Model/userProfile.js"
 
 export const signUp = async function (req, res) {
     try{
@@ -39,8 +40,14 @@ export const login = async(req, res)=>{
         if(user){
             bcrypt.compare(pass, user.dataValues.Password, async function (err, result) {
                 if(result==true){
-                    const token = jwt.sign({id: user.id}, "helllo")
-                    res.status(200).json({token})
+                   const isProfile = await userProfile.findOne({where : {UserId : user.id }})
+                    if(isProfile){
+                        const token = jwt.sign({id: user.id}, "helllo")
+                        res.status(200).json({token})          
+                    }else{
+                        const token = jwt.sign({id: user.id}, "helllo")
+                        res.status(201).json({token})  
+                    }
                 }
                 else{
                     res.status(500).json({message : "Incorrect password"})
