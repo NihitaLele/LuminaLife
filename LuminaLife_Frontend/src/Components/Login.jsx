@@ -16,7 +16,7 @@ const Login = () => {
 
   function loginAPI() {
     axios
-      .post("http://localhost:3000/loginUser", userData)
+      .post("https://luminalife.onrender.com/loginUser", userData)
       .then((response) => {
         console.log(response.status);
         localStorage.setItem("token", response.data.token)

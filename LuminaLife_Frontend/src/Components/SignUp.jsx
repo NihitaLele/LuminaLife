@@ -18,7 +18,7 @@ const SignUp = () => {
 
   const userRegister = () => {
     axios
-      .post("http://localhost:3000/registerUser", userData)
+      .post("https://luminalife.onrender.com/registerUser", userData)
       .then((response) => {
         console.log(response);
         alert("User registered");

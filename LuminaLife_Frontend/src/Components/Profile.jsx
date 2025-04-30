@@ -5,7 +5,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({});
 
   useEffect(() => {
-    axios.get("http://localhost:3000/showProfile", {
+    axios.get("https://luminalife.onrender.com/showProfile", {
       headers: {
         Authorization: localStorage.getItem("token")
       },

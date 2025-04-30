@@ -41,7 +41,7 @@ const CreateProfile = () => {
     try {
       // Send the POST request with FormData
 
-       axios.post('http://localhost:3000/upload', formData, {
+       axios.post('https://luminalife.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization : localStorage.getItem("token")

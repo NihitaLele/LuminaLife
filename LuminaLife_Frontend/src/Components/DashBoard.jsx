@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     axios
-    .get("http://localhost:3000/showProfile", {
+    .get("https://luminalife.onrender.com/showProfile", {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/showDashboard", {
+      .get("https://luminalife.onrender.com/showDashboard", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -58,7 +58,7 @@ const Dashboard = () => {
     };
 
     axios
-      .post("http://localhost:3000/addTodo", data, {
+      .post("https://luminalife.onrender.com/addTodo", data, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -80,7 +80,7 @@ const Dashboard = () => {
       emoji: item.emoji,
     };
     axios
-      .post("http://localhost:3000/addMood", data, {
+      .post("https://luminalife.onrender.com/addMood", data, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -133,7 +133,7 @@ const Dashboard = () => {
     };
 
     axios
-      .post("http://localhost:3000/addWater", data, {
+      .post("https://luminalife.onrender.com/addWater", data, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -152,7 +152,7 @@ const Dashboard = () => {
     };
 
     axios
-      .post("http://localhost:3000/addSleep", data, {
+      .post("https://luminalife.onrender.com/addSleep", data, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
