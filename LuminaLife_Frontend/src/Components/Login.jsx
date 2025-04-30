@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import LoginPic from "../assets/LoginPic.png"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Login = () => {
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6"
       >
         <img
-          src="/src/assets/Login.png" 
+          src={LoginPic}
           alt="Login Illustration"
           className="w-24 h-24 mx-auto rounded-full object-cover shadow-sm"
         />

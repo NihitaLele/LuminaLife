@@ -77,7 +77,7 @@ const CreateProfile = () => {
         <p className="text-sm text-[#6d5c4f] mb-2">Profile Preview</p>
         <div className="flex justify-center">
           <img
-            src={profileData.photo ? URL.createObjectURL(profileData.photo) : "https://via.placeholder.com/100"}
+            src={profileData.Profile ? URL.createObjectURL(profileData.Profile) : "https://via.placeholder.com/100"}
             alt="Profile Preview"
             className="h-24 w-24 rounded-full object-cover border-2 border-[#bcd4cb] shadow"
           />

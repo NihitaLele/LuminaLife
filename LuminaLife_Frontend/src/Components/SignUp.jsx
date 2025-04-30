@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+import SignUpPic from "../assets/SignUpPic.png"
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const SignUp = () => {
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6"
       >
         <img
-          src="/src/assets/SignUp.png" // Make sure this path is correct
+          src={SignUpPic} // Make sure this path is correct
           alt="Signup Illustration"
           className="w-24 h-24 mx-auto rounded-full object-cover shadow-sm"
         />

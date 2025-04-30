@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import HeroSectionPicture from "../assets/HeroSectionPicture.jpg"
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           <img
-            src="src/assets/HeroSectionPicture.jpg"
+            src={HeroSectionPicture}
             alt="Wellness Illustration"
             className="w-full max-w-sm mx-auto"
           />
