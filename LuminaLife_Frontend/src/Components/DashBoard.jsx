@@ -48,9 +48,18 @@ const Dashboard = () => {
   }, []);
 
   const addTodo = () => {
-    const updatedTodos = [...todos, todoInput]; 
+    let updatedTodos;
+    
+    if (editingIndex !== null) {
+      updatedTodos = [...todos];
+      updatedTodos[editingIndex] = todoInput;
+    } else {
+      updatedTodos = [...todos, todoInput];
+    }
 
-    setTodos(updatedTodos); 
+    setTodos(updatedTodos);
+    setTodoInput("");
+    setEditingIndex(null); 
 
     const data = {
       todo: updatedTodos, 
@@ -68,8 +77,37 @@ const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
 
-    console.log(updatedTodos); 
+  const deleteTodo = (index) => {
+    const updated = todos.filter((_, i) => i !== index);
+    setTodos(updated);
+    const data = {
+      todo: updated,
+    };
+    
+    axios
+      .post("https://luminalife.onrender.com/addTodo", data, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const startEditing = (index) => {
+    setTodoInput(todos[index]);
+    setEditingIndex(index);
+  };
+
+  const cancelEditing = () => {
+    setTodoInput("");
+    setEditingIndex(null);
   };
 
   function setMood(item) {
@@ -92,15 +130,6 @@ const Dashboard = () => {
       });
   }
 
-  const deleteTodo = (index) => {
-    const updated = todos.filter((_, i) => i !== index);
-    setTodos(updated);
-  };
-
-  const startEditing = (index) => {
-    setTodoInput(todos[index]);
-    setEditingIndex(index);
-  };
 
   useEffect(() => {
     async function fetchThought() {
@@ -209,6 +238,14 @@ const Dashboard = () => {
             >
               {editingIndex !== null ? "Update" : "Add"}
             </button>
+            {editingIndex !== null && (
+              <button
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-medium"
+                onClick={cancelEditing}
+              >
+                Cancel
+              </button>
+            )}
           </div>
           <ul className="space-y-2">
             {todos.length === 0 && (
