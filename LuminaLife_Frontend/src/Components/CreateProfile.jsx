@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const CreateProfile = () => {
+  const navigate = useNavigate()
   const [profileData, setProfileData] = useState({
     name: "",
     age: "",
@@ -52,7 +55,7 @@ const CreateProfile = () => {
         })
         .then((res) => {
           console.log(res);
-          
+          navigate("/DashBoardLayout")
         })
         .catch((error) => {
           console.log(error);
