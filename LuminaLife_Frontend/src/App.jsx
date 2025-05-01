@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -17,32 +17,29 @@ const CreateProfile = React.lazy(() => import("./Components/CreateProfile"));
 const Profile = React.lazy(() => import("./Components/Profile"));
 const Journal = React.lazy(() => import("./Components/Journal"));
 
-
-
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
       <Suspense fallback={<Loader />}>
         <Routes>
-         
           <Route path="/" element={<HeroSection />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Services" element={<Services />} />
-          <Route path="CreateProfile" element={<CreateProfile/>} />
+          <Route path="/CreateProfile" element={<CreateProfile />} />
 
-     
           <Route path="/DashBoardLayout" element={<DashBoardLayout />}>
-            <Route index element={<DashBoard />} /> 
+            <Route index element={<DashBoard />} />
             <Route path="DashBoard" element={<DashBoard />} />
             <Route path="Meditation" element={<Meditation />} />
             <Route path="Profile" element={<Profile />} />
             <Route path="Journal" element={<Journal />} />
-
-            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
+
+          {/* Catch-all route for undefined paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
       <Footer />
