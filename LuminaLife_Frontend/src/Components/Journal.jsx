@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const affirmations = [
@@ -25,6 +25,15 @@ const Journal = () => {
   );
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedText, setEditedText] = useState("");
+
+  useEffect(()=>{
+    const text = localStorage.getItem("gratitude")
+    const newNote = {
+      text: text,
+      color: pastelColors[Math.floor(Math.random() * pastelColors.length)],
+    };
+    setGratitudeList([...gratitudeList, newNote]);
+  }, [])
 
   const addGratitude = () => {
     if (gratitudeInput.trim() !== "") {
