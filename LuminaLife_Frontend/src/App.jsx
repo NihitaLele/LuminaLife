@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -19,7 +19,7 @@ const Journal = React.lazy(() => import("./Components/Journal"));
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Suspense fallback={<Loader />}>
         <Routes>
@@ -38,12 +38,11 @@ const App = () => {
             <Route path="Journal" element={<Journal />} />
           </Route>
 
-          {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
