@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
-import SignUpPic from "../assets/SignUpPic.png"
+import SignUpPic from "../assets/SignUpPic.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -11,13 +11,44 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const userData = {
-    userName: name,
-    userEmail: email,
-    userPassword: password,
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    return passwordRegex.test(password);
   };
 
   const userRegister = () => {
+    let valid = true;
+    setEmailError("");
+    setPasswordError("");
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address (e.g., xyz@gmail.com).");
+      valid = false;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "Password must be at least 6 characters, include a number and a special character."
+      );
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    const userData = {
+      userName: name,
+      userEmail: email,
+      userPassword: password,
+    };
+
     axios
       .post("https://luminalife.onrender.com/registerUser", userData)
       .then((response) => {
@@ -27,6 +58,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.log(error);
+        alert("Something went wrong during registration.");
       });
   };
 
@@ -74,6 +106,9 @@ const SignUp = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-[#d8e2dc] rounded-md focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
             />
+            {emailError && (
+              <p className="text-sm text-red-500 mt-1">{emailError}</p>
+            )}
           </div>
 
           <div>
@@ -88,6 +123,9 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-[#d8e2dc] rounded-md focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
             />
+            {passwordError && (
+              <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+            )}
           </div>
 
           <button

@@ -40,6 +40,8 @@ const App = () => {
             <Route path="Meditation" element={<Meditation />} />
             <Route path="Profile" element={<Profile />} />
             <Route path="Journal" element={<Journal />} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </Suspense>

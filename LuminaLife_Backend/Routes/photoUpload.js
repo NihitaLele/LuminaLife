@@ -11,11 +11,10 @@ const upload = multer({ storage });
 
 const router = express.Router();
 
-// Attach upload.single('image') middleware BEFORE the handler
 router.post("/upload",Auth, upload.single("image"), async (req, res) => {
   try {
     console.log(req.file); 
-    console.log(req.body); // Other text fields
+    console.log(req.body); 
 
     await userProfile.create({
       Profile: req.file.path,

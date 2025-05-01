@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import axios from 'axios';
-
+import axios from "axios";
 
 const CreateProfile = () => {
-
   const [profileData, setProfileData] = useState({
     name: "",
     age: "",
@@ -24,32 +22,45 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const dobDate = new Date(profileData.dob);
+    const currentDate = new Date();
+    const calculatedAge = currentDate.getFullYear() - dobDate.getFullYear();
+    const ageMatch = calculatedAge === parseInt(profileData.age);
+
+    if (!ageMatch) {
+      alert("Age does not match the Date of Birth. Please verify the information.");
+      return;
+    }
     const formData = new FormData();
-    
-    Object.keys(profileData).forEach(key => {
+
+    Object.keys(profileData).forEach((key) => {
       if (profileData[key] !== null && profileData[key] !== "") {
-        console.log("appending data")
+        console.log("appending data");
         formData.append(key, profileData[key]);
-        console.log("data appended")
+        console.log("data appended");
       }
     });
-    
+
     try {
-       axios.post('https://luminalife.onrender.com/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization : localStorage.getItem("token")
-        },
-      }).then((res)=>{
-        console.log(res)
-      }).catch((error)=>{
-        console.log(error)
-      });
-      
-      console.log(formData)  
-      console.log(profileData)  
-      console.log("Profile submitted:", profileData);
+      axios
+        .post("https://luminalife.onrender.com/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          console.log(res);
           
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      console.log(formData);
+      console.log(profileData);
+      console.log("Profile submitted:", profileData);
     } catch (error) {
       console.log("Error submitting profile:", error);
     }
@@ -65,14 +76,22 @@ const CreateProfile = () => {
         <p className="text-sm text-[#6d5c4f] mb-2">Profile Preview</p>
         <div className="flex justify-center">
           <img
-            src={profileData.Profile ? URL.createObjectURL(profileData.Profile) : "https://via.placeholder.com/100"}
+            src={
+              profileData.image
+                ? URL.createObjectURL(profileData.image)
+                : "https://via.placeholder.com/100"
+            }
             alt="Profile Preview"
             className="h-24 w-24 rounded-full object-cover border-2 border-[#bcd4cb] shadow"
           />
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6" encType="multipart/form-data">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6"
+        encType="multipart/form-data"
+      >
         <div>
           <label className="block text-sm font-medium text-[#6d5c4f] mb-1">
             Profile Picture

@@ -2,36 +2,68 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-import LoginPic from "../assets/LoginPic.png"
+import LoginPic from "../assets/LoginPic.png";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const userData = {
-    userEmail: email,
-    userPassword: password,
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
-  function loginAPI() {
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const loginAPI = () => {
+    // Reset errors
+    setEmailError("");
+    setPasswordError("");
+
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address (e.g., xyz@gmail.com).");
+    }
+
+    if (!isPasswordValid) {
+      setPasswordError(
+        "Password must be at least 6 characters, include a number and a special character."
+      );
+    }
+
+    if (!isEmailValid || !isPasswordValid) return;
+
+    const userData = {
+      userEmail: email,
+      userPassword: password,
+    };
+
     axios
       .post("https://luminalife.onrender.com/loginUser", userData)
       .then((response) => {
         console.log(response.status);
-        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("token", response.data.token);
         alert("User Logged in");
-        if(response.status==200){
-          navigate("/DashBoardLayout")
-        }else{
-         navigate("/CreateProfile");
+        if (response.status === 200) {
+          navigate("/DashBoardLayout");
+        } else {
+          navigate("/CreateProfile");
         }
       })
       .catch((error) => {
         console.log(error);
+        alert("Login failed. Please check your credentials.");
       });
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-10 font-sans bg-[#f8f9fa]">
@@ -63,6 +95,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-[#d8e2dc] rounded-md focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
             />
+            {emailError && <p className="text-sm text-red-500 mt-1">{emailError}</p>}
           </div>
 
           <div>
@@ -77,6 +110,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-[#d8e2dc] rounded-md focus:outline-none focus:ring-2 focus:ring-[#bcd4cb]"
             />
+            {passwordError && <p className="text-sm text-red-500 mt-1">{passwordError}</p>}
           </div>
 
           <button
