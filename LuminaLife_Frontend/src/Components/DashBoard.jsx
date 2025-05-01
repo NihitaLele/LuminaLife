@@ -38,6 +38,7 @@ const Dashboard = () => {
         const dashboard = res.data.dashboard;
 
         setTodos(dashboard.Todo); 
+        setMood(dashboard.CheckIn);
         setWaterIntake(dashboard.WaterIntake);
         setSleepHours(dashboard.SleepTracker);
         setDashboardData(dashboard);
