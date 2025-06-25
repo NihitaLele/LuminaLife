@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import { config } from "dotenv";
-config();
+import dotenv from "dotenv";
+dotenv.config();
 
 export const db = new Sequelize(
   process.env.DB_NAME,
@@ -9,10 +9,13 @@ export const db = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "postgres",
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 5432,
     logging: false,
     dialectOptions: {
-      ssl: true // optional, only if needed
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // ✅ fixes unexpected termination from SSL cert
+      },
     },
     pool: {
       max: 10,
