@@ -4,7 +4,7 @@ import User from "../Model/userModel.js";
 const auth = (req, res, next) => {
   try {
     const token = req.header("Authorization");
-    const user = jwt.verify(token, "helllo"); // Secret should ideally come from .env
+    const user = jwt.verify(token, "helllo");
     console.log(user);
 
     User.findOne({ where: { id: user.id } })

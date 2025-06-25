@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { db } from "../Database/mySql.js";
+import { db } from "../Database/pgDB.js";
 
  const User = db.define("User",
 

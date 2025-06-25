@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import {db} from "../Database/mySql.js"
+import {db} from "../Database/pgDB.js"
 
 const userProfile = db.define("userProfile",
     {
@@ -22,7 +22,7 @@ const userProfile = db.define("userProfile",
             allowNull : false
         },
         DOB : {
-            type : DataTypes.STRING,
+            type : DataTypes.DATE,
             allowNull : false
         },
         Gender : {

@@ -1,5 +1,5 @@
 import express from "express"
-import { db } from "./Database/mySql.js";
+import { db } from "./Database/pgDB.js";
 import  User  from "./Model/userModel.js";
 import cors from "cors"
 import userRoute from "./Routes/userRoutes.js"
